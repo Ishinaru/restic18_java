@@ -3,11 +3,11 @@ package exemplos_classes;
 public class Gato extends Animal{
     private String nome;
 
-    Gato(){
+    public Gato(){
         this.nome = "Gato Padrão";
     }
 
-    Gato(String nome){
+    public Gato(String nome){
         this.nome = nome;
     }
 

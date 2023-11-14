@@ -3,11 +3,11 @@ package exemplos_classes;
 public class Porco extends Animal {
     private String nome;
 
-    Porco(){
+    public Porco(){
         this.nome = "Porco Padrão";
     }
 
-    Porco(String nome){
+    public Porco(String nome){
         this.nome = nome;
     }
 
