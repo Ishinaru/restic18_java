@@ -68,51 +68,60 @@ public class Usuario {
 		this.pontuacao = pontuacao;
 	}
 
-	private void adicionaPostagem(String post) {
+	public void adicionaPostagem(String post) {
 		postagens.add(post);
 		quantidadePostagens += 1;
 	}
 
-	private void alterarPontuacao(int delta) {
-		pontuacao += delta;
+	public void alterarPontuacao(int delta) {
+		if (pontuacao + delta < 0) {
+			System.out.println("Pontuação negativa");
+		} else {
+			pontuacao += delta;
+		}
+	}
+
+	public void mostrarPostagens() {
+		for (int i = 0; i < postagens.size(); i++) {
+			System.out.println(postagens.get(i)+"\n");
+		}
 	}
 
 	public static void main(String[] args) {
-		do{
+		String sn;
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Escreva o nome: ");
-		String nome = sc.nextLine();
-		System.out.print("Escreva o email: ");
-		String email = sc.nextLine();
-		System.out.print("Escreva a nascionalidade: ");
-		String nasc = sc.nextLine();
-		Usuario usuario = new Usuario(nome, email, nasc);
-		System.out.print("Escreva a postagem 1:");
-		String postagem = sc.nextLine();
-		usuario.adicionaPostagem(postagem);
-		System.out.print("Escreva a postagem 2:");
-		postagem = sc.nextLine();
-		usuario.adicionaPostagem(postagem);
-		System.out.print("Escreva a postagem 3:");
-		postagem = sc.nextLine();
-		usuario.adicionaPostagem(postagem);
-		
-		System.out.println(usuario.getPostagens());
-		System.out.println("Quantide de postagens = " + usuario.getQuantidadePostagens());
-		System.out.println("Pontuação = " + usuario.getPontuacao());
-		usuario.alterarPontuacao(-20);
-		System.out.println("Pontuação = " + usuario.getPontuacao());
-		
-		System.out.print("Escreva a postagem 4:");
-		postagem = sc.nextLine();
-		usuario.adicionaPostagem(postagem);
-		usuario.alterarPontuacao(100);
-		System.out.println("Quantide de postagens = " + usuario.getQuantidadePostagens());
-		System.out.println("Pontuação = " + usuario.getPontuacao());
-		
+		do {
+			ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+
+			System.out.print("Escreva o nome: ");
+			String nome = sc.nextLine();
+			System.out.print("Escreva o email: ");
+			String email = sc.nextLine();
+			System.out.print("Escreva a nascionalidade: ");
+			String nasc = sc.nextLine();
+			Usuario usuario = new Usuario(nome, email, nasc);
+			listaUsuarios.add(usuario);
+			do {
+				System.out.print("Deseja fazer uma postagem? ");
+				sn = sc.nextLine();
+				if (sn.equals("n")) {
+					break;
+				} else {
+					System.out.print("Escreva aqui sua postagem: ");
+					String post = sc.nextLine();
+					usuario.adicionaPostagem(post);
+				}
+
+			} while (!sn.equals("n"));
+
+			System.out.println("Postagens de "+usuario.getNome()+" : ");
+			usuario.mostrarPostagens();
+
+			System.out.print("Deseja inserir novos usuários? ");
+			sn = sc.nextLine();
+		} while (!sn.equals("n"));
 		sc.close();
-		}while();
-		
+
 	}
 
 }
