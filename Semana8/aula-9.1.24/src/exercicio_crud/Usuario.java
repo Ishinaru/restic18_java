@@ -6,15 +6,21 @@ import java.util.Scanner;
 public class Usuario {
 	private String nome;
 	private String email;
+	private String senha;
 	private String nacionalidade;
 	private ArrayList<String> postagens;
 	private int quantidadePostagens;
 	private int pontuacao;
 
-	public Usuario(String nome, String email, String nacionalidade) {
+	public String getSenha() {
+		return senha;
+	}
+
+	public Usuario(String nome, String email, String senha, String nacionalidade) {
 		this.nome = nome;
 		this.email = email;
 		this.nacionalidade = nacionalidade;
+		this.senha = senha;
 		this.postagens = new ArrayList<String>();
 		this.quantidadePostagens = 0;
 		this.pontuacao = 0;
@@ -88,7 +94,7 @@ public class Usuario {
 	}
 
 	public String toString(){
-		return "Nome: "+nome+"\t;Email: "+email+"\t;Nacionalidade: "+nacionalidade;
+		return "Nome: "+nome+";Email: "+email+";Nacionalidade: "+nacionalidade;
 	}
 
 	public void mostrarUsuario(){
@@ -107,7 +113,7 @@ public class Usuario {
 			String email = sc.nextLine();
 			System.out.print("Escreva a nascionalidade: ");
 			String nasc = sc.nextLine();
-			Usuario usuario = new Usuario(nome, email, nasc);
+			Usuario usuario = new Usuario(nome, email, senha, nasc);
 			listaUsuarios.add(usuario);
 			do {
 				System.out.print("Deseja fazer uma postagem? ");

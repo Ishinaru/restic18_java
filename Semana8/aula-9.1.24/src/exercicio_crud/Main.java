@@ -14,13 +14,15 @@ public class Main {
                                 "4 - Excluir Usuário\n" +
                                 "0 - Sair");
             int resp = sc.nextInt();
+            sc.nextLine();
             switch(resp){
                 case 1:
                     users.inserirUsuario();
                     break;
                 case 2:
                     Usuario user = users.buscarUsuario();
-                    user.mostrarUsuario();
+                    if(user!=null)
+                        user.mostrarUsuario();
                     break;
                 case 3:
                     users.listarUsuarios();

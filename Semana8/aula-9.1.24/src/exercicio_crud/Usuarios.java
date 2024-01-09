@@ -12,11 +12,12 @@ public class Usuarios {
         String nome = sc.nextLine();
         System.out.print("Email: ");
         String email = sc.nextLine();
+        System.out.print("Senha: ");
+        String senha = sc.nextLine();
         System.out.print("Nacionalidade: ");
         String nac = sc.nextLine();
-        Usuario user = new Usuario(nome, email, nac);
+        Usuario user = new Usuario(nome, email, senha, nac);
         listaUsuarios.add(user);
-        sc.close();
     }
     public Usuario buscarUsuario(){
         Scanner sc = new Scanner(System.in);
@@ -47,6 +48,7 @@ public class Usuarios {
             if (usuario.getEmail().equals(email)){
                 listaUsuarios.remove(usuario);
                 System.out.println("Usuário removido com sucesso!");
+                return;
             }
         }
     }
