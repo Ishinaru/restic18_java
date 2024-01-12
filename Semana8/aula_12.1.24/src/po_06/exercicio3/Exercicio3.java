@@ -1,6 +1,8 @@
 package po_06.exercicio3;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Exercicio3 {
@@ -13,26 +15,34 @@ public class Exercicio3 {
         BufferedWriter bwOrigem = new BufferedWriter(fwOrigem);
         BufferedWriter bwDestino = new BufferedWriter(fwDestino);
 
-        FileReader frOrigem = new FileReader(arquivoOrigem);
-        FileReader frDestino = new FileReader(arquivoDestino);
-        BufferedReader brOrigem = new BufferedReader(frOrigem);
-        BufferedReader brDestino = new BufferedReader(frDestino);
+
 
         Scanner sc = new Scanner(System.in);
+        String linha;
 
-        System.out.println("Escreva as linhas do arquivo de origem: ");
+        System.out.println("Escreva as linhas do arquivo de origem <linha em branco - sair>: ");
 
+        do {
+            linha = sc.nextLine();
+            bwOrigem.write(linha);
+            bwOrigem.newLine();
+        } while (!linha.isEmpty());
 
-        fwOrigem.close();
-        frOrigem.close();
         bwOrigem.close();
-        bwDestino.close();
+        fwOrigem.close();
 
-        frDestino.close();
-        fwDestino.close();
+        FileReader frOrigem = new FileReader(arquivoOrigem);
+        BufferedReader brOrigem = new BufferedReader(frOrigem);
+
+        while(brOrigem.ready()){
+            linha = brOrigem.readLine();
+            bwDestino.write(linha);
+            bwDestino.newLine();
+        }
+
         brOrigem.close();
-        brDestino.close();
-
-        sc.close();
+        frOrigem.close();
+        bwDestino.close();
+        fwDestino.close();
     }
 }
