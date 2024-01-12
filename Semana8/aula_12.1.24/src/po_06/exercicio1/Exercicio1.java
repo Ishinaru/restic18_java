@@ -11,6 +11,8 @@ public class Exercicio1 {
             String linha = br.readLine();
             System.out.println(linha);
         }
+        fr.close();
+        br.close();
     }
 
 
