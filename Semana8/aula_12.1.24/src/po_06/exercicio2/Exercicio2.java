@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Exercicio2 {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+
         File arquivo = new File("src/po_06/exercicio2/saida.txt");
         FileWriter fw = new FileWriter(arquivo);
         BufferedWriter bw = new BufferedWriter(fw);
