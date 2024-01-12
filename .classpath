@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="Semana1/PO-01/calculadora_conversor/src"/>
-	<classpathentry kind="src" path="Semana1/PO-01/exemplos_java/src"/>
-	<classpathentry kind="src" path="Semana2/Aula14_11/src"/>
-	<classpathentry kind="output" path="Semana1/PO-01/calculadora_conversor/bin"/>
-</classpath>
