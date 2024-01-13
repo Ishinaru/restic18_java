@@ -10,15 +10,25 @@ public class Trajeto {
     public void addTrechos(Trecho trecho){
         trechosPercorridos.add(trecho);
     }
+    public void addTrechos(List<Trecho> listaTrechos){
+        trechosPercorridos.addAll(listaTrechos);
+    }
     private List<Trecho> listarTrechos(){
         return trechosPercorridos;
+    }
+
+    public int tempoTotal(){
+        int tempoTotal = 0;
+        for(Trecho t : trechosPercorridos)
+            tempoTotal+= t.getTempoTrajeto();
+        return tempoTotal;
     }
     public String toString(){
         String str = "";
         for (Trecho t : trechosPercorridos) {
             str += t.toString() + "\n\t\t";
         }
-        return "Trajeto:\n\t\t" + str;
+        return "Trajeto:\n\t\t" + str +"\n\t\tDuração do trajeto: "+tempoTotal()+" minutos";
     }
 
     public void printTrajeto(){
@@ -41,8 +51,10 @@ public class Trajeto {
             int tempo = sc.nextInt();
             sc.nextLine();
             Trecho trecho = new Trecho(pOrigem, pDestino, tempo);
-            trajeto.addTrechos(trecho);
+            trechos.add(trecho);
+
         }
+        trajeto.addTrechos(trechos);
         trajeto.printTrajeto();
 
     }

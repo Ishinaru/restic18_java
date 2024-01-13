@@ -10,6 +10,10 @@ public class Trecho {
         this.tempoTrajeto = tempoTrajeto;
     }
 
+    public int getTempoTrajeto() {
+        return tempoTrajeto;
+    }
+
     public String toString() {
         return "Trecho: ("+pontoOrigem.getNome()+" , "+pontoDestino.getNome()+") - Duração: "+tempoTrajeto+" minutos";
     }
