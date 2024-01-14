@@ -14,7 +14,8 @@ public class Motorista extends Pessoa{
     }
 
     public String toString(){
-        return super.toString()+ "\nID do Motorista: "+idMotorista;
+        String str = "\n------------------------------------------------------------------------------------";
+        return "Motorista:\t"+super.toString()+ "\n\t\t\t\tID do Motorista: "+idMotorista+str;
     }
 
     public void printMotorista(){

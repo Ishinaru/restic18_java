@@ -14,7 +14,8 @@ public class Cobrador extends Pessoa{
     }
 
     public String toString(){
-        return super.toString()+ "\nID do Cobrador: "+idCobrador;
+        String str = "\n------------------------------------------------------------------------------------";
+        return "Cobrador:\t"+super.toString()+ "\n\t\t\t\tID do Cobrador: "+idCobrador+str;
     }
 
     public void printCobrador(){

@@ -35,4 +35,12 @@ public class Veiculo {
     public void estacionar(PontoParada parada){
         pontosEstacionados.add(parada);
     }
+
+    public String toString(){
+        String str = "\n------------------------------------------------------------------------------------";
+        return "Veículo:\tModelo: "+modelo+"\tPlaca: "+placa+"\n\t\t\t\tID Veículo: "+idVeiculo+str;
+    }
+    public void printVeiculo(){
+        System.out.println(this.toString());
+    }
 }

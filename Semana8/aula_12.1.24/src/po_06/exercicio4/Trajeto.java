@@ -25,10 +25,11 @@ public class Trajeto {
     }
     public String toString(){
         String str = "";
+        String str2 = "\n------------------------------------------------------------------------------------";
         for (Trecho t : trechosPercorridos) {
             str += t.toString() + "\n\t\t";
         }
-        return "Trajeto:\n\t\t" + str +"\n\t\tDuração do trajeto: "+tempoTotal()+" minutos";
+        return "Trajeto:\n\t\t" + str +"\n\t\tDuração do trajeto: "+tempoTotal()+" minutos"+str2;
     }
 
     public void printTrajeto(){
