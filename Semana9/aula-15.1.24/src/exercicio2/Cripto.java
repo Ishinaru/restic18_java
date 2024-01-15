@@ -15,7 +15,8 @@ public class Cripto {
             while (!eof) {
                 int input = file1.read();
                 if (input != -1) {
-                    vetor.add(input);
+                    int output = input ^ 0xFF;
+                    vetor.add(output);
                     count++;
                 } else eof = true;
             }
