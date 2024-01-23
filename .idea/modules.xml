@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/restic18_java.iml" filepath="$PROJECT_DIR$/restic18_java.iml" />
+=======
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/Semana7/Semana7.iml" filepath="$PROJECT_DIR$/Semana7/Semana7.iml" />
+>>>>>>> 759beec204c2f994e854322e22ecae5043465a29
+      <module fileurl="file://$PROJECT_DIR$/.idea/restic18_java.iml" filepath="$PROJECT_DIR$/.idea/restic18_java.iml" />
+>>>>>>> 41d3c28114bad0feca4890b19cef1ce9dafa98a2
+    </modules>
+  </component>
+</project>
