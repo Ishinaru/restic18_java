@@ -22,6 +22,12 @@ public class Configuracao {
     public void definirAlfabeto(String alfabeto){
         if(!alfabeto.isEmpty() && !verificaRepeticao(alfabeto))
             this.alfabeto = alfabeto;
+
+        else if (alfabeto.length()<2){
+            System.out.println("O alfabeto deve possuir mais de 1\n" +
+                    "caracter");
+        }
+
         else
             System.out.println("O alfabeto não pode ser vazio nem conter repetições");
     }

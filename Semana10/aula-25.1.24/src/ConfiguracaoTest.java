@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Test;
+
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,12 +17,27 @@ class ConfiguracaoTest {
     @org.junit.jupiter.api.Test
     void definirAlfabetoTestNulo(){
         Configuracao configuracao = new Configuracao();
-        String senha = "";
+        String alfabeto = "";
         try{
-            configuracao.definirAlfabeto(senha);
+            configuracao.definirAlfabeto(alfabeto);
     }catch (Exception e){
             assertEquals("Alfabeto não pode ser nulo", e.getMessage());
         }
-
+        assertNotEquals(alfabeto, configuracao.getAlfabeto());
     }
+
+    @org.junit.jupiter.api.Test
+    void definirAlfabetoTestMaiorZero(){
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "AB";
+        try{
+            configuracao.definirAlfabeto(alfabeto);
+        }catch (Exception e){
+            assertEquals("O alfabeto deve possuir mais de 1\n" +
+                    "caracter", e.getMessage());
+        }
+        assertNotEquals(alfabeto, configuracao.getAlfabeto());
+    }
+
+
 }
