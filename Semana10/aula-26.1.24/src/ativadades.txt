@@ -29,3 +29,31 @@ UPDATE `Empregados` SET `Nome` = `Pedro` WHERE `CPF` = '2615228';
 
 //● (Desafio) Dê um aumento de 5% para todos os funcionários
 UPDATE `Empregados` SET `Salario` = `Salario` * 1,05 ;
+
+
+====================================================================================================
+
+insert into Empregado values ('5161410','Tõe','M',6203,100);
+insert into Empregado values ('1176139','Lia','F',6122,200);
+insert into Empregado values ('2615228','Peu','M',4026,300);
+insert into Empregado values ('5349202','Lara','F',6846,100);
+insert into Empregado values ('4726628','Tico','M',5956,200);
+insert into Empregado values ('1260137','Leila','F',4782,300);
+insert into Empregado values ('7868685','Susi','F',2208,300);
+
+insert into Empregado values ('1176139','Lia','F',6122,200);
+
+
+insert into Departamento values (100,'Financeiro');
+insert into Departamento values (200,'Recursos Humanos');
+insert into Departamento values (300,'Vendas');
+
+
+INSERT INTO `Empregado` (`id`, `Nome`, `CPF`, `Salario`, `Genero`) VALUES
+(1, 'Tõe', '5161410', 6203.00, 'M'),
+(2, 'Lia', '1176139', 6122.00, 'F'),
+(3, 'Peu', '2615228', 4026.00, 'M'),
+(4, 'Lara', '5349202', 6846.00, 'F'),
+(5, 'Tico', '4726628', 5956.00, 'M'),
+(6, 'Leila', '1260137', 4782.00, 'F'),
+(7, 'Susi', '7868685', 2208.00, 'F');
