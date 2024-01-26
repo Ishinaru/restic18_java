@@ -35,11 +35,26 @@ public class Configuracao {
             this.alfabeto = alfabeto;
     }
 
-    public void setTamanhoSenha(int tamanhoSenha) {
-        this.tamanhoSenha = tamanhoSenha;
+    public void setTamanhoSenha(int tamanhoSenha) throws Exception{
+        if(tamanhoSenha < 1){
+            throw new Exception("Senha deve ter ao menos 1 caracter");
+        }
+        else if(tamanhoSenha > alfabeto.length()){
+            throw new Exception("Senha não pode ser maior que o alfabeto : "+alfabeto.length()+" caracteres");
+        }
+        else
+            this.tamanhoSenha = tamanhoSenha;
     }
 
-    public void setMaxTentativas(int maxTentativas) {
+    public int getTamanhoSenha() {
+        return tamanhoSenha;
+    }
+
+    public void setMaxTentativas(int maxTentativas) throws Exception{
+        if(maxTentativas < 1){
+            throw new Exception("Deve haver pelo menos 1 tentativa");
+        }
+
         this.maxTentativas = maxTentativas;
     }
 

@@ -1,5 +1,7 @@
 package configuracao;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConfiguracaoTest {
@@ -11,7 +13,7 @@ class ConfiguracaoTest {
         try {
             configuracao.definirAlfabeto(alfabeto);
         } catch (Exception e) {
-            fail("Gerou excecao indevida: "+e.getMessage());
+            fail("Gerou exceção indevida: "+e.getMessage());
         }
         assertEquals(alfabeto, configuracao.getAlfabeto());
     }
@@ -123,8 +125,101 @@ class ConfiguracaoTest {
         }
         assertNotEquals(alfabeto, configuracao.getAlfabeto());
     }
+    @org.junit.jupiter.api.Test
+    void setTamanhoSenhaTest(){
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "ABCD";
+        try{
+            configuracao.definirAlfabeto(alfabeto);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //caso geral: tamanho de senha válido(entre 1 e 4)
+        Random rand = new Random();
+        int tam = rand.nextInt(1,5);
+        System.out.println(tam);
+        try {
+            configuracao.setTamanhoSenha(tam);
+        } catch (Exception e) {
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+        assertEquals(tam, configuracao.getTamanhoSenha());
+    }
 
+    @org.junit.jupiter.api.Test
+    void setTamanhoSenhaTestNegativo() {
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "ABCD";
+        try {
+            configuracao.definirAlfabeto(alfabeto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //caso 1: tamanho de senha negativo
+        int tam = -1;
+        try {
+            configuracao.setTamanhoSenha(tam);
+        } catch (Exception e) {
+            assertEquals("Senha deve ter ao menos 1 caracter", e.getMessage());
+        }
+        assertNotEquals(tam, configuracao.getTamanhoSenha());
+    }
 
+    @org.junit.jupiter.api.Test
+    void setTamanhoSenhaTestIgualZero() {
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "ABCD";
+        try {
+            configuracao.definirAlfabeto(alfabeto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //caso 2: tamanho de senha igual a 0
+        int tam = 0;
+        try {
+            configuracao.setTamanhoSenha(tam);
+        } catch (Exception e) {
+            assertEquals("Senha deve ter ao menos 1 caracter", e.getMessage());
+        }
+        assertNotEquals(tam, configuracao.getTamanhoSenha());
+    }
 
+    @org.junit.jupiter.api.Test
+    void setTamanhoSenhaTestIgualAlfabeto() {
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "ABCD";
+        try {
+            configuracao.definirAlfabeto(alfabeto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //caso 2 versão 2: tamanho de senha igual ao tamanho do alfabeto (4 caracteres)
+        int tam = 4;
+        try {
+            configuracao.setTamanhoSenha(tam);
+        } catch (Exception e) {
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+        assertEquals(tam, configuracao.getTamanhoSenha());
 
+    }
+
+    @org.junit.jupiter.api.Test
+    void setTamanhoSenhaTestMaiorAlfabeto() {
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "ABCD";
+        try {
+            configuracao.definirAlfabeto(alfabeto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //caso 2 versão 2: tamanho de senha maior que tamanho do alfabeto (4 caracteres)
+        int tam = 5;
+        try {
+            configuracao.setTamanhoSenha(tam);
+        } catch (Exception e) {
+            assertEquals("Senha não pode ser maior que o alfabeto : "+alfabeto.length()+" caracteres", e.getMessage());
+        }
+        assertNotEquals(tam, configuracao.getTamanhoSenha());
+    }
 }
