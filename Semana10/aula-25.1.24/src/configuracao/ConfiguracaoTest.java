@@ -222,4 +222,79 @@ class ConfiguracaoTest {
         }
         assertNotEquals(tam, configuracao.getTamanhoSenha());
     }
+
+    @org.junit.jupiter.api.Test
+    void setMaxTentativaTest() {
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "ABCD";
+        int tam = 4;
+        try {
+            configuracao.definirAlfabeto(alfabeto);
+        }catch (Exception e){
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+
+        try {
+            configuracao.setTamanhoSenha(tam);
+        }catch (Exception e){
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+        int tentativas = 2;
+        try {
+            configuracao.setMaxTentativas(tentativas);
+        }catch (Exception e){
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+    }
+
+    @org.junit.jupiter.api.Test
+    void setMaxTentativaTestNegativo() {
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "ABCD";
+        int tam = 4;
+        try {
+            configuracao.definirAlfabeto(alfabeto);
+        }catch (Exception e){
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+
+        try {
+            configuracao.setTamanhoSenha(tam);
+        }catch (Exception e){
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+        int tentativas = -1;
+        try {
+            configuracao.setMaxTentativas(tentativas);
+        }catch (Exception e){
+            assertEquals("Deve haver pelo menos 1 tentativa", e.getMessage());
+        }
+        assertNotEquals(tentativas, configuracao.getMaxTentativas());
+    }
+
+    @org.junit.jupiter.api.Test
+    void setMaxTentativaTestZero() {
+        Configuracao configuracao = new Configuracao();
+        String alfabeto = "ABCD";
+        int tam = 4;
+        try {
+            configuracao.definirAlfabeto(alfabeto);
+        }catch (Exception e){
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+
+        try {
+            configuracao.setTamanhoSenha(tam);
+        }catch (Exception e){
+            fail("Gerou exceção indevida: "+e.getMessage());
+        }
+        int tentativas = 0;
+        try {
+            configuracao.setMaxTentativas(tentativas);
+        }catch (Exception e){
+            assertEquals("Deve haver pelo menos 1 tentativa", e.getMessage());
+        }
+        assertNotEquals(tentativas, configuracao.getMaxTentativas());
+    }
+
 }

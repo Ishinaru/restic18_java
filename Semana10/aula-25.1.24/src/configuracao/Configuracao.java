@@ -54,8 +54,12 @@ public class Configuracao {
         if(maxTentativas < 1){
             throw new Exception("Deve haver pelo menos 1 tentativa");
         }
+        else
+            this.maxTentativas = maxTentativas;
+    }
 
-        this.maxTentativas = maxTentativas;
+    public int getMaxTentativas() {
+        return maxTentativas;
     }
 
     protected boolean verificaRepeticao(String alfabeto){
@@ -67,4 +71,6 @@ public class Configuracao {
         }
         return false;
     }
+
+
 }
