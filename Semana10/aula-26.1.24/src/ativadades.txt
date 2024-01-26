@@ -1,0 +1,31 @@
+//● Liste todos os funcionários do gênero feminino
+SELECT * FROM `Empregados` WHERE `Genero` = 'F';
+
+//● Liste o Nome dos funcionários do gênero masculino
+SELECT `Nome` FROM `Empregados` WHERE `Genero` = 'M';
+
+//● Liste o CPF dos funcionários do gênero feminino que ganha mais do
+    que 5000 reais
+SELECT `CPF` FROM `Empregados` WHERE `Genero` = 'F' AND `Salario` > 5000;
+
+//● (Desafio) Liste os funcionários que ganham salário maior que o de Tico
+SELECT * FROM `Empregados` WHERE `Salario` > (SELECT `Salario` WHERE `Nome` = `Tico`);
+
+//● (Desafio) Liste o Nome do funcionário que ganha mais
+SELECT `Nome` FROM `Empregados` ORDER BY `Salario` DESC LIMIT 1;
+
+//● Dê um aumento de 500 reais aos funcionários que ganham menos do
+  que 6000 reais
+UPDATE `Empregados` SET `Salario` = `Salario` + 500 WHERE `Salario` < 6000;
+
+//● Dê um aumento de 1000 reais aos empregados do sexo feminino
+UPDATE `Empregados` SET `Salario` = `Salario` + 1000 WHERE `Genero` = 'F';
+
+//● Mude o Gênero de Susi (use seu CPF) para ‘M’
+UPDATE `Empregados` SET `Genero` = `M` WHERE `CPF` = '7868685';
+
+//● Mude o nome do funcionário de CPF ‘2615228’ para ‘Pedro’
+UPDATE `Empregados` SET `Nome` = `Pedro` WHERE `CPF` = '2615228';
+
+//● (Desafio) Dê um aumento de 5% para todos os funcionários
+UPDATE `Empregados` SET `Salario` = `Salario` * 1,05 ;
