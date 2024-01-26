@@ -1,9 +1,9 @@
 /*public class Jogo {
-    private Configuracao configuracao;
+    private configuracao.Configuracao configuracao;
     private String senha;
     private int qtdTentativas;
 
-    public Jogo(Configuracao configuracao, String senha) {
+    public Jogo(configuracao.Configuracao configuracao, String senha) {
         this.configuracao = configuracao;
         setSenha(senha);
         this.qtdTentativas = 0;

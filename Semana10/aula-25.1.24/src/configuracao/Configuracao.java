@@ -1,3 +1,5 @@
+package configuracao;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,17 +21,18 @@ public class Configuracao {
         return alfabeto;
     }
 
-    public void definirAlfabeto(String alfabeto){
-        if(!alfabeto.isEmpty() && !verificaRepeticao(alfabeto))
-            this.alfabeto = alfabeto;
-
-        else if (alfabeto.length()<2){
-            System.out.println("O alfabeto deve possuir mais de 1\n" +
-                    "caracter");
+    public void definirAlfabeto(String alfabeto) throws Exception{
+        if(alfabeto == null || alfabeto.isEmpty()){
+            throw new Exception("Alfabeto não pode ser vazio ou nulo");
         }
-
+        else if(alfabeto.length() < 2){
+            throw new Exception("O alfabeto deve possuir mais de 1 caracter");
+        }
+        else if(verificaRepeticao(alfabeto)){
+            throw new Exception("Não podem haver caracteres repetidos no alfabeto");
+        }
         else
-            System.out.println("O alfabeto não pode ser vazio nem conter repetições");
+            this.alfabeto = alfabeto;
     }
 
     public void setTamanhoSenha(int tamanhoSenha) {
@@ -40,7 +43,7 @@ public class Configuracao {
         this.maxTentativas = maxTentativas;
     }
 
-    public boolean verificaRepeticao(String alfabeto){
+    protected boolean verificaRepeticao(String alfabeto){
         Set<Character> caracteres = new HashSet<>();
         for (char c : alfabeto.toCharArray()){
             if (!caracteres.add(c)){
