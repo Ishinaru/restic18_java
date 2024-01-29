@@ -15,6 +15,7 @@ public class TestaUsuario {
         UsuarioDAO.create(usuario);
         */
 
+        /* Select todos os usuarios
         ArrayList<Usuario> usuarios = UsuarioDAO.readAll();
         for (Usuario usuario : usuarios){
             System.out.println(usuario.getLogin());
@@ -22,6 +23,11 @@ public class TestaUsuario {
             System.out.println(usuario.getEmail());
             System.out.println("============================");
         }
+        */
 
+        Usuario user = UsuarioDAO.readById("Ishinaru");
+        System.out.println(user.getLogin());
+        System.out.println(user.getSenha());
+        System.out.println(user.getEmail());
     }
 }

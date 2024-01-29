@@ -48,4 +48,25 @@ public class UsuarioDAO {
         return listaUsuarios;
     }
 
+    public static Usuario readById(String login){
+        Connection conn = DAO.conectar();
+        String query = "SELECT Login, Senha, Email FROM Usuario WHERE Login = ?";
+        Usuario usuario = new Usuario();
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, login);
+            ResultSet rs =  ps.executeQuery();
+            while (rs.next()){
+                usuario.setLogin(rs.getString("Login"));
+                usuario.setSenha(rs.getString("Senha"));
+                usuario.setEmail(rs.getString("Email"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return usuario;
+    }
+
+
 }
