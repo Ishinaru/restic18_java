@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UsuarioDAO {
 
@@ -68,5 +69,26 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    public static boolean update(Usuario usuario){
+        Connection conn = DAO.conectar();
+        Scanner sc = new Scanner(System.in);
+        String query = "UPDATE Usuario SET Senha=?, Email=? WHERE Login = ?";
+
+        System.out.print("Nova senha: ");
+        String senha = sc.nextLine();
+        System.out.print("Novo email: ");
+        String email = sc.nextLine();
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, senha);
+            ps.setString(2, email);
+            ps.setString(3, usuario.getLogin());
+            ps.execute();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
 }
