@@ -19,8 +19,4 @@ public class DAO {
         return con;
     }
 
-    public static void main(String[] args) {
-        DAO.conectar();
-
-    }
 }
