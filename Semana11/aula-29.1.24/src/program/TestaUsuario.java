@@ -31,13 +31,22 @@ public class TestaUsuario {
         System.out.println(user.getSenha());
         System.out.println(user.getEmail());
          */
+
+        /* Update usuario por login
         Usuario usuario = UsuarioDAO.readById("Ishinaru");
         UsuarioDAO.update(usuario);
         usuario = UsuarioDAO.readById("Ishinaru");
         System.out.println(usuario.getLogin());
         System.out.println(usuario.getSenha());
         System.out.println(usuario.getEmail());
+        */
 
+        Usuario usuario = UsuarioDAO.readById("Ishinaru");
+        UsuarioDAO.delete(usuario);
+        usuario = UsuarioDAO.readById("Ishinaru");
+        System.out.println(usuario.getLogin());
+        System.out.println(usuario.getSenha());
+        System.out.println(usuario.getEmail());
 
     }
 }

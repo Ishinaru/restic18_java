@@ -87,6 +87,23 @@ public class UsuarioDAO {
         }catch (Exception e){
             e.printStackTrace();
         }
+        sc.close();
+        return false;
+    }
+
+    public static boolean delete(Usuario usuario){
+        Connection conn = DAO.conectar();
+        String query = "DELETE FROM Usuario WHERE Login = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, usuario.getLogin());
+            ps.execute();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         return false;
     }
