@@ -49,20 +49,20 @@ public class MenuGestaoClientes {
     }
 
     public void incluirCliente(){
-        Scanner sc = new Scanner(System.in);
+
+
+    }
+    Scanner sc = new Scanner(System.in);
         System.out.println("---------------------------------------------------------------------");
         System.out.println("\t\t INCLUIR CLIENTE \t\t");
         System.out.println("---------------------------------------------------------------------");
         System.out.print("Digite o nome do cliente: ");
-        String nome = sc.nextLine();
+    String nome = sc.nextLine();
         System.out.print("Digite o CPF do cliente: ");
-        String cpf = sc.nextLine();
-        Clientes cliente = new Clientes(nome, cpf);
+    String cpf = sc.nextLine();
+    Clientes cliente = new Clientes(nome, cpf);
         listaClientes.add(cliente);
         System.out.println("Cliente adicionado com sucesso!!");
-
-    }
-
     public void consultarCliente(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Digite o CPF do Cliente para consulta: ");

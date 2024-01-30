@@ -5,10 +5,12 @@ import java.util.Scanner;
 public class Clientes {
     private String cpf;
     private String nome;
+    private Imoveis imovel;
 
-    public Clientes (String nome, String cpf){
+    public Clientes (String nome, String cpf, Imoveis imovel){
         setCpf(cpf);
         this.nome = nome;
+        this.imovel = imovel;
     }
 
     public java.lang.String getCpf() {
@@ -75,7 +77,7 @@ public class Clientes {
     }
 
     public String toString(){
-        String str = "Cliente:\tNome: "+nome+"\t|\tCPF: "+cpf;
+        String str = "Cliente:\tNome: "+nome+"\t|\tCPF: "+cpf+"\nImóvel: "+imovel.toString();
         return str;
     }
 
