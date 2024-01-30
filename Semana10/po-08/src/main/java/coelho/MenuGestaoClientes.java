@@ -56,10 +56,10 @@ public class MenuGestaoClientes {
         listaClientes.add(cliente);
         System.out.println("Cliente adicionado com sucesso!!");
     }
-
+/*
     public void consultarCliente(String cpf){
         if
-    }
+    }*/
     public void listarClientes(){
         for(Clientes cliente: listaClientes) {
             System.out.println("---------------------------------------------------------------------");
