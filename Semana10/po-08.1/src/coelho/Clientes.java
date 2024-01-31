@@ -77,13 +77,12 @@ public class Clientes {
     }
 
     public String toString(){
-        String str = "Cliente:\tNome: "+nome+"\t|\tCPF: "+cpf+"\nImóvel: "+imovel.toString();
-        return str;
+        String str = "\n----------------------------------------------------------------------------------------------";
+        return str+"\nCliente:\tNome:\t"+nome+"\t|\tCPF: "+cpf+"\n\t"+imovel.toString();
     }
 
     public void mostrarCliente(){
         System.out.println(this.toString());
     }
-
 
 }

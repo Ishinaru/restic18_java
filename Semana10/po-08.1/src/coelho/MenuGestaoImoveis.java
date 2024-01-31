@@ -1,12 +1,12 @@
-/*
 package coelho;
+import javax.swing.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class MenuGestaoImoveis {
-    private List<Imoveis> listaImoveis = new ArrayList<>();
+    private static List<Imoveis> listaImoveis = new ArrayList<>();
     public void exibirMenu(){
         Scanner sc = new Scanner(System.in);
         do {
@@ -31,17 +31,18 @@ public class MenuGestaoImoveis {
                     break;
 
                 case 2:
-                    consultarCliente();
+                    consultarImovel();
                     break;
                 case 3:
-                    listarClientes();
+                    listarImoveis();
                     break;
+                    /*
                 case 4:
                     excluirCliente();
                     break;
                 case 5:
                     alterarCliente();
-                    break;
+                    break;*/
                 case 0:
                     return;
             }
@@ -49,19 +50,52 @@ public class MenuGestaoImoveis {
 
     }
 
-    public void incluirImovel(){
+    public static Imoveis incluirImovel(){
         Scanner sc = new Scanner(System.in);
         System.out.println("---------------------------------------------------------------------");
         System.out.println("\t\t INCLUIR IMÓVEL \t\t");
         System.out.println("---------------------------------------------------------------------");
-        System.out.print("Digite a matrícula: ");
-        String nome = sc.nextLine();
-        System.out.print("Digite o CPF do cliente: ");
-        String cpf = sc.nextLine();
-        Clientes cliente = new Clientes(nome, cpf);
-        listaClientes.add(cliente);
-        System.out.println("Cliente adicionado com sucesso!!");
+        System.out.print("Digite o endereço do imóvel: ");
+        String endereco = sc.nextLine();
+
+        System.out.print("Digite o valor da penúltima leitura do imóvel: ");
+
+        double penultimaLeitura = sc.nextDouble();
+        sc.nextLine();
+
+        System.out.print("Digite o valor da última leitura do imóvel: ");
+        double ultimaLeitura = sc.nextDouble();
+        sc.nextLine();
+        Imoveis imovel = new Imoveis(endereco, penultimaLeitura, ultimaLeitura);
+        listaImoveis.add(imovel);
+        System.out.println("Imóvel adicionado com sucesso!!");
+        return imovel;
+    }
+
+    public void consultarImovel(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Digite a Matrícula do Imóvel para consulta: ");
+        String matricula = sc.nextLine();
+        int matriculaInt = Integer.parseInt(matricula);
+        for (Imoveis imovel : listaImoveis){
+            if (matriculaInt == Integer.parseInt(imovel.getMatricula())){
+                System.out.println("----------------------------------------------------------------------------------------------");
+                imovel.mostrarImovel();
+                return;
+            }
+        }
+        System.out.println("Imóvel não encontrado!");
+    }
+
+    public void listarImoveis(){
+        for(Imoveis i : listaImoveis){
+            i.mostrarImovel();
+        }
+    }
+
+    public static void main(String[] args) {
+        MenuGestaoImoveis menuGestao = new MenuGestaoImoveis();
+        menuGestao.exibirMenu();
     }
 
 }
-*/

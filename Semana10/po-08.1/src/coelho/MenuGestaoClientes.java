@@ -47,22 +47,20 @@ public class MenuGestaoClientes {
         }while (true);
 
     }
-
     public void incluirCliente(){
-
-
-    }
-    Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("---------------------------------------------------------------------");
         System.out.println("\t\t INCLUIR CLIENTE \t\t");
         System.out.println("---------------------------------------------------------------------");
         System.out.print("Digite o nome do cliente: ");
-    String nome = sc.nextLine();
+        String nome = sc.nextLine();
         System.out.print("Digite o CPF do cliente: ");
-    String cpf = sc.nextLine();
-    Clientes cliente = new Clientes(nome, cpf);
+        String cpf = sc.nextLine();
+        Imoveis imovel = MenuGestaoImoveis.incluirImovel();
+        Clientes cliente = new Clientes(nome, cpf, imovel);
         listaClientes.add(cliente);
         System.out.println("Cliente adicionado com sucesso!!");
+    }
     public void consultarCliente(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Digite o CPF do Cliente para consulta: ");
@@ -70,7 +68,6 @@ public class MenuGestaoClientes {
         String aux = Clientes.apenasNumeral(cpf);
         for (Clientes cliente : listaClientes){
             if (aux.equals(Clientes.apenasNumeral(cliente.getCpf()))){
-                System.out.println("---------------------------------------------------------------------");
                 cliente.mostrarCliente();
                 System.out.println("---------------------------------------------------------------------\n");
                 return;
@@ -81,11 +78,8 @@ public class MenuGestaoClientes {
 
     public void listarClientes(){
         for(Clientes cliente: listaClientes) {
-            System.out.println("---------------------------------------------------------------------");
             cliente.mostrarCliente();
-            System.out.println("---------------------------------------------------------------------\n");
         }
-        System.out.println("---------------------------------------------------------------------");
     }
 
     public void excluirCliente(){
