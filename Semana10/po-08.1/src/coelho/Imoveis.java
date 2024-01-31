@@ -10,6 +10,18 @@ public class Imoveis {
     private double penultimaLeitura;
     private double ultimaLeitura;
 
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setPenultimaLeitura(double penultimaLeitura) {
+        this.penultimaLeitura = penultimaLeitura;
+    }
+
+    public void setUltimaLeitura(double ultimaLeitura) {
+        this.ultimaLeitura = ultimaLeitura;
+    }
+
     public Imoveis(java.lang.String endereco, double penultimaLeitura, double ultimaLeitura) {
         setMatricula();
         this.endereco = endereco;

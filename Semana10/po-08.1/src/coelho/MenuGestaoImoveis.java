@@ -36,13 +36,13 @@ public class MenuGestaoImoveis {
                 case 3:
                     listarImoveis();
                     break;
-                    /*
+
                 case 4:
-                    excluirCliente();
+                    excluirImovel();
                     break;
                 case 5:
-                    alterarCliente();
-                    break;*/
+                    alterarImovel();
+                    break;
                 case 0:
                     return;
             }
@@ -93,6 +93,63 @@ public class MenuGestaoImoveis {
         }
     }
 
+    public void excluirImovel(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Digite a Matrícula do Imóvel para excluir: ");
+        String matricula = sc.nextLine();
+        int matriculaInt = Integer.parseInt(matricula);
+        for (Imoveis imovel : listaImoveis){
+            if (matriculaInt == Integer.parseInt(imovel.getMatricula())){
+                listaImoveis.remove(imovel);
+                System.out.println("Imóvel removido com sucesso!!!");
+                return;
+            }
+        }
+        System.out.println("Imóvel não encontrado!");
+    }
+
+    public void alterarImovel(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Digite a Matrícula do Imóvel para alterar: ");
+        String matricula = sc.nextLine();
+        int matriculaInt = Integer.parseInt(matricula);
+        int opcao;
+        for (Imoveis imovel : listaImoveis){
+            if (matriculaInt == Integer.parseInt(imovel.getMatricula())){
+                do {
+                    System.out.println("O que deseja alterar do imóvel " + imovel.getMatricula() + "?");
+                    System.out.println( "1 - Alterar Endereço\n" +
+                                        "2 - Alterar Penúltima Leitura\n" +
+                                        "3 - Alterar Última Leitura\n" +
+                                        "0 - Sair\n");
+                    opcao = sc.nextInt();
+                    sc.nextLine();
+                    if (opcao == 1){
+                        System.out.print("Novo endereço: ");
+                        imovel.setEndereco(sc.nextLine());
+                        System.out.println("Endereço alterado com sucesso!!!");
+                        return;
+                    }
+                    else if(opcao == 2){
+                        System.out.print("Nova Penúltima Leitura:");
+                        imovel.setPenultimaLeitura(sc.nextDouble());
+                        System.out.println("Penúltima Leitura alterada com sucesso!!!");
+                        return;
+                    }
+                    else if(opcao == 3){
+                        System.out.print("Nova Última Leitura:");
+                        imovel.setUltimaLeitura(sc.nextDouble());
+                        System.out.println("Última Leitura alterada com sucesso!!!");
+                        return;
+                    }
+                    else
+                        return;
+
+                }while (true);
+            }
+        }
+        System.out.println("Imóvel não encontrado!");
+    }
     public static void main(String[] args) {
         MenuGestaoImoveis menuGestao = new MenuGestaoImoveis();
         menuGestao.exibirMenu();
