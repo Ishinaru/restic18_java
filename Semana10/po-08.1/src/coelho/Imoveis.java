@@ -9,6 +9,15 @@ public class Imoveis {
     private String endereco;
     private double penultimaLeitura;
     private double ultimaLeitura;
+    private List<Faturas> faturasRelacionadas;
+
+    public double getPenultimaLeitura() {
+        return penultimaLeitura;
+    }
+
+    public double getUltimaLeitura() {
+        return ultimaLeitura;
+    }
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
