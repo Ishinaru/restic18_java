@@ -6,25 +6,19 @@ public class Clientes {
     private String cpf;
     private String nome;
     private Imoveis imovel;
-
     public Clientes (String nome, String cpf, Imoveis imovel){
         setCpf(cpf);
         this.nome = nome;
         this.imovel = imovel;
     }
-
     public java.lang.String getCpf() {
         return cpf;
     }
-
     public java.lang.String getNome() {
         return nome;
     }
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    public void setNome(Scanner sc) {
-        this.nome = sc.toString();
     }
     public void setCpf(String cpf){
         Scanner sc = new Scanner(System.in);
@@ -39,21 +33,6 @@ public class Clientes {
         }
         this.cpf = cpf;
     }
-
-    public void setCpf(Scanner sc){
-        String cpf;
-        if(verificaCpf(sc.toString())==0){
-            do {
-                System.out.println("Cpf inválido, tente novamente!!!");
-                cpf = sc.nextLine();
-            } while ((verificaCpf(cpf) == 0));
-        }
-        if (verificaCpf(sc.toString()) == 2) {
-            cpf = formataCpf(sc.toString());
-        }
-        this.cpf = sc.toString();
-    }
-
     private int verificaCpf(String cpf){
         String aux = apenasNumeral(cpf);
         if (aux.matches("\\d+") && cpf.length()==14 && cpf.charAt(3) == '.' && cpf.charAt(7) == '.' && cpf.charAt(11) == '-')
@@ -66,23 +45,18 @@ public class Clientes {
                 return 0;
         }
     }
-
     private String formataCpf(String cpf){
         return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
     }
-
     public static String apenasNumeral(String cpf){
         String aux = cpf.replaceAll("[^0-9]", "");
         return aux;
     }
-
     public String toString(){
         String str = "\n----------------------------------------------------------------------------------------------";
         return str+"\nCliente:\tNome:\t"+nome+"\t|\tCPF: "+cpf+"\n\t"+imovel.toString();
     }
-
     public void mostrarCliente(){
         System.out.println(this.toString());
     }
-
 }
