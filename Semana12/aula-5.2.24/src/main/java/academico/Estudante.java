@@ -1,15 +1,12 @@
 package academico;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Estudante {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer Id;
+    private Integer Id;
     private String Nome;
     private String Email;
     private String Matricula;
@@ -21,11 +18,11 @@ public class Estudante {
         this.Matricula = Matricula;
     }
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         Id = id;
     }
 
@@ -54,6 +51,23 @@ public class Estudante {
     }
 
     public String toString(){
-        return "Nome: "+Nome+"\nEmail: "+Email+"\nMatrícula: "+Matricula;
+        return "ID:"+Id+"Nome: "+Nome+"\nEmail: "+Email+"\nMatrícula: "+Matricula;
+    }
+
+    public static void main(String[] args) {
+        /*Estudante e1 = new Estudante("David","david@gmail.com","201910280");
+        Estudante e2 = new Estudante("Ian","iangaymer@gmail.com","201911111");
+        Estudante e3 = new Estudante("Degas","degasçado@gmail.com","199010101");
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit_academico");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(e1);
+        em.persist(e2);
+        em.persist(e3);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();*/
+
     }
 }
