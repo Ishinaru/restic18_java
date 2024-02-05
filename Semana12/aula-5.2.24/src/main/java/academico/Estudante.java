@@ -51,23 +51,32 @@ public class Estudante {
     }
 
     public String toString(){
-        return "ID:"+Id+"Nome: "+Nome+"\nEmail: "+Email+"\nMatrícula: "+Matricula;
+        return "ID: "+Id+"\nNome: "+Nome+"\nEmail: "+Email+"\nMatrícula: "+Matricula;
     }
 
     public static void main(String[] args) {
-        /*Estudante e1 = new Estudante("David","david@gmail.com","201910280");
-        Estudante e2 = new Estudante("Ian","iangaymer@gmail.com","201911111");
-        Estudante e3 = new Estudante("Degas","degasçado@gmail.com","199010101");
+        /* Insert
+            Estudante e1 = new Estudante("David","david@gmail.com","201910280");
+            Estudante e2 = new Estudante("Ian","iangaymer@gmail.com","201911111");
+            Estudante e3 = new Estudante("Degas","degasçado@gmail.com","199010101");
+
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit_academico");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+            em.persist(e1);
+            em.persist(e2);
+            em.persist(e3);
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+         */
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit_academico");
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(e1);
-        em.persist(e2);
-        em.persist(e3);
-        em.getTransaction().commit();
+        Estudante e = em.find(Estudante.class, 2);
+        System.out.println(e);
         em.close();
-        emf.close();*/
+        emf.close();
 
     }
 }
