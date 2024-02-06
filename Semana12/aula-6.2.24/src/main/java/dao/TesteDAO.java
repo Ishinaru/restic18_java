@@ -6,6 +6,7 @@ import academico.Estudante;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 public class TesteDAO {
     public static void preparaBD(EntityManager em){
@@ -35,7 +36,11 @@ public class TesteDAO {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit_academico");
         EntityManager em = emf.createEntityManager();
+        /* criar e preparar banco
         TesteDAO.preparaBD(em);
         System.out.println("BD Criado");
+        */
+        String jpql = "select e from Estudante e";
+        TypedQuery<Estudante> tq = em.createQuery(jpql, Estudante.class);
     }
 }

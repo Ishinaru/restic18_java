@@ -1,6 +1,7 @@
 package academico;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Curso {
@@ -9,6 +10,17 @@ public class Curso {
     private Integer Id;
     private String Nome;
     private Integer NumSemestre;
+
+    public List<Estudante> getListaEstudantes() {
+        return listaEstudantes;
+    }
+
+    public void setListaEstudantes(List<Estudante> listaEstudantes) {
+        this.listaEstudantes = listaEstudantes;
+    }
+
+    @OneToMany(mappedBy = "Curso")
+    private List<Estudante> listaEstudantes;
     public Integer getId() {
         return Id;
     }

@@ -8,6 +8,7 @@ public class Estudante {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer Id;
     @ManyToOne
+    @JoinColumn(name = "CodCurso")
     private Curso Curso;
     private String Nome;
 
