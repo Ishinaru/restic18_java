@@ -31,7 +31,7 @@ public class Imoveis {
         this.ultimaLeitura = ultimaLeitura;
     }
 
-    public Imoveis(java.lang.String endereco, double penultimaLeitura, double ultimaLeitura) {
+    public Imoveis(String endereco, double penultimaLeitura, double ultimaLeitura) {
         setMatricula();
         this.endereco = endereco;
         this.penultimaLeitura = penultimaLeitura;

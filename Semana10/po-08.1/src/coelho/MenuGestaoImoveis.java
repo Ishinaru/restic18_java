@@ -87,6 +87,19 @@ public class MenuGestaoImoveis {
         System.out.println("Imóvel não encontrado!");
     }
 
+    public static Imoveis consultaImoveis(String matricula){
+        int matriculaInt = Integer.parseInt(matricula);
+        for (Imoveis imovel : listaImoveis){
+            if (matriculaInt == Integer.parseInt(imovel.getMatricula())){
+                System.out.println("----------------------------------------------------------------------------------------------");
+                imovel.mostrarImovel();
+                return imovel;
+            }
+        }
+        System.out.println("Imóvel não encontrado!");
+        return null;
+    }
+
     public void listarImoveis(){
         for(Imoveis i : listaImoveis){
             i.mostrarImovel();
