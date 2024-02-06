@@ -2,11 +2,13 @@ package dao;
 
 import academico.Curso;
 import academico.Estudante;
+import dto.EstudanteDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class TesteDAO {
     public static void preparaBD(EntityManager em){
@@ -30,17 +32,89 @@ public class TesteDAO {
         em.persist(e5);
         em.persist(e6);
         em.getTransaction().commit();
-        em.close();
     }
 
+    public static void listarEstudantes(EntityManager em){
+        String jpql = "select e from Estudante e";
+        TypedQuery<Estudante> tq = em.createQuery(jpql, Estudante.class);
+        List<Estudante> listaEstudante = tq.getResultList();
+        for (Estudante e : listaEstudante)
+            System.out.println(e);
+    }
+
+    public static void selecionarEstudante(EntityManager em){
+        String jpql = "select e from Estudante e where Id = 1";
+        TypedQuery<Estudante> tq = em.createQuery(jpql, Estudante.class);
+        Estudante estudante = tq.getSingleResult();
+        System.out.println(estudante);
+    }
+
+    public static void alterarEstudante(EntityManager em){
+        String jpql = "select e from Estudante e where Id = 1";
+        TypedQuery<Estudante> tq = em.createQuery(jpql, Estudante.class);
+        Estudante estudante = tq.getSingleResult();
+        estudante.setEmail("david-novo@gmail.com");
+        System.out.println("Email alterado com sucesso!!!");
+        em.getTransaction().begin();
+        em.persist(estudante);
+        em.getTransaction().commit();
+        System.out.println(estudante);
+    }
+
+    public static void selecionarEstudanteNome(EntityManager em){
+        String jpql = "select e.Nome from Estudante e";
+        TypedQuery<String> tq = em.createQuery(jpql, String.class);
+        List<String> listaEstudante = tq.getResultList();
+        for (String e: listaEstudante)
+            System.out.println(e);
+    }
+
+    public static void gerarEstudanteDTO(EntityManager em){
+        String jpql = "select new dto.EstudanteDTO(e.Nome, e.Email, e.Matricula, e.Curso.Nome) from Estudante e";
+        TypedQuery tq = em.createQuery(jpql, EstudanteDTO.class);
+        List<EstudanteDTO>listaEstudanteDTO = tq.getResultList();
+        for(EstudanteDTO e: listaEstudanteDTO){
+            System.out.println(e);
+        }
+
+    }
+
+    public static void mostrarEstudanteCurso(EntityManager em, Integer num){
+        String jpql = "select c from Curso where numSemestre = :num";
+        TypedQuery<Curso> tq = em.createQuery(jpql, Curso.class);
+        tq.setParameter("num", num);
+
+    }
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit_academico");
         EntityManager em = emf.createEntityManager();
-        /* criar e preparar banco
+
+        //criar e preparar banco
+
         TesteDAO.preparaBD(em);
         System.out.println("BD Criado");
-        */
-        String jpql = "select e from Estudante e";
-        TypedQuery<Estudante> tq = em.createQuery(jpql, Estudante.class);
+
+        //listar todos os estudantes
+        listarEstudantes(em);
+
+        //listar estudante com id 1
+        System.out.println("-------------------------");
+        selecionarEstudante(em);
+
+        //alterar email do estudante com id 1
+        System.out.println("-------------------------");
+        alterarEstudante(em);
+
+        //selecionar estudantes por campo nome
+        System.out.println("-------------------------");
+        selecionarEstudanteNome(em);
+
+        //gerar estudantes DTO
+        System.out.println("-------------------------");
+        gerarEstudanteDTO(em);
+
+
+        em.close();
+
     }
 }

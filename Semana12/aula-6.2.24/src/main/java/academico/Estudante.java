@@ -64,7 +64,7 @@ public class Estudante {
     }
 
     public String toString(){
-        return "ID: "+Id+"\nNome: "+Nome+"\nEmail: "+Email+"\nMatrícula: "+Matricula;
+        return "ID: "+Id+"\nNome: "+Nome+"\nEmail: "+Email+"\nMatrícula: "+Matricula+"\nCurso: "+Curso;
     }
 
     public static void main(String[] args) {
