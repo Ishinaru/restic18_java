@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @RestController
 public class UsuarioController {
-    @RequestMapping("/listausuarios")
+    @RequestMapping("/listausuarios2")
     public ArrayList<UsuarioDTO> listaUsuarios(){
         ArrayList<UsuarioDTO> lista = new ArrayList<>();
         lista.add(new UsuarioDTO(new Usuario((long)1,"David", "david@gmail.com", "senha1234567890")));
