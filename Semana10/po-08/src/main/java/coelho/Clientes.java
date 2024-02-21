@@ -11,6 +11,14 @@ public class Clientes {
         this.nome = nome;
     }
 
+    public java.lang.String getCpf() {
+        return cpf;
+    }
+
+    public java.lang.String getNome() {
+        return nome;
+    }
+
     public void setCpf(String cpf){
         Scanner sc = new Scanner(System.in);
         if(verificaCpf(cpf)==0){

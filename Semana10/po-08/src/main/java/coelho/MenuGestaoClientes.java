@@ -20,17 +20,20 @@ public class MenuGestaoClientes {
                                 "5 - Alterar cliente (por CPF)\n" +
                                 "0 - Sair");
             System.out.print("Escolha uma opção: ");
-            int opcao = sc.nextInt();
-            sc.nextLine();
 
-                switch (opcao){
+                int opcao = sc.nextInt();
+                sc.nextLine();
+
+                switch (opcao) {
                     case 1:
                         incluirCliente();
                         break;
                     case 2:
+                        consultarCliente();
                         break;
                     case 3:
                         listarClientes();
+                        break;
                     case 4:
                         break;
                     case 5:
@@ -38,8 +41,9 @@ public class MenuGestaoClientes {
                     case 0:
                         return;
                 }
-        }while (true);
 
+        }while (true);
+        sc.close();
 
     }
 
@@ -56,10 +60,21 @@ public class MenuGestaoClientes {
         listaClientes.add(cliente);
         System.out.println("Cliente adicionado com sucesso!!");
     }
-/*
-    public void consultarCliente(String cpf){
-        if
-    }*/
+
+    public void consultarCliente(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Digite o CPF do Cliente para consulta: ");
+        String cpf = sc.nextLine();
+        for (Clientes cliente : listaClientes){
+            if (cpf.equals(cliente.getCpf())) {
+                System.out.println("---------------------------------------------------------------------");
+                cliente.mostrarCliente();
+                System.out.println("---------------------------------------------------------------------\n");
+            }
+            else
+                System.out.println("Cliente não encontrado!");
+        }
+    }
     public void listarClientes(){
         for(Clientes cliente: listaClientes) {
             System.out.println("---------------------------------------------------------------------");
