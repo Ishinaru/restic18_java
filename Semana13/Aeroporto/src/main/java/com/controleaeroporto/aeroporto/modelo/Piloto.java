@@ -17,9 +17,9 @@ public class Piloto {
     }
 
     public Piloto(Long id, String nome, String numBreve) {
-        Id = id;
-        Nome = nome;
-        NumBreve = numBreve;
+        this.Id = id;
+        this.Nome = nome;
+        this.NumBreve = numBreve;
     }
 
     public Long getId() {
