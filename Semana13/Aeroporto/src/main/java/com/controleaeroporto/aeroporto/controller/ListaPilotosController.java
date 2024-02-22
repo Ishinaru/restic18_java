@@ -15,6 +15,6 @@ public class ListaPilotosController {
     private PilotoRepository pilotoRepository;
     @RequestMapping("/listapilotos")
     public List<Piloto> listaPilotos(){
-        return (ArrayList<Piloto>) pilotoRepository.findAll();
+        return pilotoRepository.findAll();
     }
 }

@@ -13,8 +13,8 @@ import java.util.List;
 public class ModelosAeronavesController {
     @Autowired
     private ModeloAeronaveRepository modeloAeronaveRepository;
-    @RequestMapping("/listamodeloaeronave")
+    @RequestMapping("/listamodeloaeronaves")
     public List<ModeloAeronave> listaModeloAeronave(){
-        return (ArrayList<ModeloAeronave>) modeloAeronaveRepository.findAll();
+        return modeloAeronaveRepository.findAll();
     }
 }

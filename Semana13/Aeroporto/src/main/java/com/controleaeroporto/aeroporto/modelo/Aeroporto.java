@@ -14,10 +14,10 @@ public class Aeroporto {
     private String Nome;
     public Aeroporto(){}
 
-    public Aeroporto(Long id, String ICAO, String nome) {
-        Id = id;
+    public Aeroporto(Long id, String nome, String ICAO) {
+        this.Id = id;
         this.ICAO = ICAO;
-        Nome = nome;
+        this.Nome = nome;
     }
 
     public Long getId() {

@@ -16,9 +16,9 @@ public class ModeloAeronave {
     public ModeloAeronave() {}
 
     public ModeloAeronave(Long id, String fabricante, String nome) {
-        Id = id;
-        Fabricante = fabricante;
-        Nome = nome;
+        this.Id = id;
+        this.Fabricante = fabricante;
+        this.Nome = nome;
     }
 
     public Long getId() {
