@@ -1,17 +1,19 @@
 package org.redesocial.redesocial.controller;
 
+import org.antlr.v4.runtime.misc.LogManager;
 import org.redesocial.redesocial.controller.dto.UsuarioDTO;
+import org.redesocial.redesocial.controller.form.UsuarioForm;
 import org.redesocial.redesocial.modelo.Usuario;
+import org.redesocial.redesocial.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
 public class UsuarioController {
-    @RequestMapping("/listausuarios2")
+    @RequestMapping("/Users")
     public ArrayList<UsuarioDTO> listaUsuarios(){
         ArrayList<UsuarioDTO> lista = new ArrayList<>();
         lista.add(new UsuarioDTO(new Usuario((long)1,"David", "david@gmail.com", "senha1234567890")));
@@ -21,4 +23,5 @@ public class UsuarioController {
         lista.add(new UsuarioDTO(new Usuario((long)0,"Kainê", "kainelinda@gmail.com", "senhateste")));
         return lista;
     }
+
 }
