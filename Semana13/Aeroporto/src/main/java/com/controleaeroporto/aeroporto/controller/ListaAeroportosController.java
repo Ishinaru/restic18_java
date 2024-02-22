@@ -15,6 +15,6 @@ public class ListaAeroportosController {
     private AeroportoRepository aeroportoRepository;
     @RequestMapping("/listaaeroporto")
     public List<Aeroporto>listaAeroportos(){
-        return (ArrayList<Aeroporto>) aeroportoRepository.findAll();
+        return (<Aeroporto>) aeroportoRepository.findAll();
     }
 }
