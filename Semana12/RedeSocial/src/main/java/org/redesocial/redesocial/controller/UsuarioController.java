@@ -57,7 +57,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?>updateUsuariosId(@RequestBody UsuarioForm uf, @PathVariable Long id){
-        if(id==null) {
+        if(id!=null) {
             try {
 
                 Usuario usuario = usuarioRepository.getReferenceById(id);
@@ -69,6 +69,23 @@ public class UsuarioController {
                 return ResponseEntity.ok(usuarioDTO);
             } catch (Exception e) {
                 return ResponseEntity.notFound().build();
+            }
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?>deleteUsuariosDelete(@RequestBody UsuarioForm uf, @PathVariable Long id){
+        if(id != null){
+            try{
+                Usuario usuario = usuarioRepository.getReferenceById(id);
+                UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+                usuarioRepository.delete(usuario);
+                System.out.println(usuarioDTO.getNome());
+                return ResponseEntity.ok(usuarioDTO);
+            }
+            catch (Exception e){
+                ResponseEntity.notFound().build();
             }
         }
         return ResponseEntity.badRequest().build();
