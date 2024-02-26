@@ -6,22 +6,51 @@ import org.redesocial.redesocial.controller.form.UsuarioForm;
 import org.redesocial.redesocial.modelo.Usuario;
 import org.redesocial.redesocial.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
+@RequestMapping("/usuarios")
 public class UsuarioController {
-    @RequestMapping("/Users")
-    public ArrayList<UsuarioDTO> listaUsuarios(){
-        ArrayList<UsuarioDTO> lista = new ArrayList<>();
-        lista.add(new UsuarioDTO(new Usuario((long)1,"David", "david@gmail.com", "senha1234567890")));
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-        lista.add(new UsuarioDTO(new Usuario((long)2,"Dora", "dora123@gmail.com", "senhateste")));
-        lista.add(new UsuarioDTO(new Usuario((long)3,"Ana", "anana@gmail.com", "senhateste")));
-        lista.add(new UsuarioDTO(new Usuario((long)0,"Kainê", "kainelinda@gmail.com", "senhateste")));
-        return lista;
+    @PostMapping
+    public ResponseEntity<UsuarioDTO>inserir(@RequestBody UsuarioForm uf, UriComponentsBuilder ub){
+        Usuario usuario = uf.criarUsuario();
+        usuarioRepository.save(usuario);
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+        ub.path("/usuarios/{id}");
+        URI uri = ub.buildAndExpand(usuario.getId()).toUri();
+        return ResponseEntity.created(uri).body(usuarioDTO);
     }
 
+    @GetMapping
+    public List<UsuarioDTO> retornaUsuarios(String name){
+        List<Usuario>listaUsuarios = (ArrayList<Usuario>) usuarioRepository.findAll();
+        List<UsuarioDTO> listaUsuariosDTO = new ArrayList<UsuarioDTO>();
+        for (Usuario user: listaUsuarios){
+            UsuarioDTO userDTO = new UsuarioDTO(user);
+            listaUsuariosDTO.add(userDTO);
+        }
+        return listaUsuariosDTO;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?>listaUsuariosId(@PathVariable Long id) {
+        try {
+            Usuario usuario = usuarioRepository.getReferenceById(id);
+            UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+            return ResponseEntity.ok(usuarioDTO);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
