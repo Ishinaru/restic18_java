@@ -57,19 +57,20 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?>updateUsuariosId(@RequestBody UsuarioForm uf, @PathVariable Long id){
-        try {
+        if(id==null) {
+            try {
 
-            Usuario usuario = usuarioRepository.getReferenceById(id);
-            usuario.setNome(uf.getNome());
-            usuario.setEmail(uf.getEmail());
-            usuario.setSenha(uf.getSenha());
-            usuarioRepository.save(usuario);
-            UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
-            return ResponseEntity.ok(usuarioDTO);
+                Usuario usuario = usuarioRepository.getReferenceById(id);
+                usuario.setNome(uf.getNome());
+                usuario.setEmail(uf.getEmail());
+                usuario.setSenha(uf.getSenha());
+                usuarioRepository.save(usuario);
+                UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+                return ResponseEntity.ok(usuarioDTO);
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
         }
-        catch (Exception e){
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.badRequest().build();
     }
-
 }
