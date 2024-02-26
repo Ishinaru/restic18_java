@@ -14,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -53,4 +54,22 @@ public class UsuarioController {
         }
 
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?>updateUsuariosId(@RequestBody UsuarioForm uf, @PathVariable Long id){
+        try {
+
+            Usuario usuario = usuarioRepository.getReferenceById(id);
+            usuario.setNome(uf.getNome());
+            usuario.setEmail(uf.getEmail());
+            usuario.setSenha(uf.getSenha());
+            usuarioRepository.save(usuario);
+            UsuarioDTO usuarioDTO = new UsuarioDTO(usuario);
+            return ResponseEntity.ok(usuarioDTO);
+        }
+        catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
