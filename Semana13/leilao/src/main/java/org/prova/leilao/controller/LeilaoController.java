@@ -45,7 +45,7 @@ public class LeilaoController {
             return ResponseEntity.badRequest().build();
     }
     @PostMapping("/{id}")
-    public ResponseEntity<?> inserir(@RequestBody LeilaoForm leilaoForm , UriComponentsBuilder uriBuilder){
+    public ResponseEntity<?> inserirLeilao(@RequestBody LeilaoForm leilaoForm , UriComponentsBuilder uriBuilder){
         try{
             Leilao leilao = leilaoForm.criarLeilao();
             leilaoRepository.save(leilao);
@@ -56,5 +56,23 @@ public class LeilaoController {
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?>updtadeLeilaoId(@RequestBody LeilaoForm leilaoForm, @PathVariable Long id){
+        if(id!=null) {
+            try {
+                Leilao leilao = leilaoRepository.getReferenceById(id);
+                leilao.setDescricao(leilao.getDescricao());
+                leilao.setValorMaximo(leilao.getValorMaximo());
+                leilao.setAberto(leilao.isAberto());
+                leilaoRepository.save(leilao);
+                LeilaoDTO leilaoDTO = new LeilaoDTO(leilao);
+                return ResponseEntity.ok(leilaoDTO);
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
