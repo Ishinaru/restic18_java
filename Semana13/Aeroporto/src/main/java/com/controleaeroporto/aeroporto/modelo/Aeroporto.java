@@ -20,6 +20,11 @@ public class Aeroporto {
         this.Nome = nome;
     }
 
+    public Aeroporto(String nome, String ICAO) {
+        this.ICAO = ICAO;
+        this.Nome = nome;
+    }
+
     public Long getId() {
         return Id;
     }
