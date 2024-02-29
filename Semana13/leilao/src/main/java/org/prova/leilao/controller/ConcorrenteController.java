@@ -57,4 +57,24 @@ public class ConcorrenteController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?>updateConcorrenteId(@RequestBody ConcorrenteForm concorrenteForm, @PathVariable Long id){
+        if(id!=null) {
+            try {
+                Concorrente concorrente = concorrenteRepository.getReferenceById(id);
+                concorrente.setNome(concorrenteForm.getNome());
+                concorrente.setCpf(concorrenteForm.getCpf());
+                concorrenteRepository.save(concorrente);
+                ConcorrenteDTO concorrenteDTO = new ConcorrenteDTO(concorrente);
+                return ResponseEntity.ok(concorrenteDTO);
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
+
 }
