@@ -2,13 +2,16 @@ package org.prova.leilao.controller;
 
 import org.prova.leilao.controller.dto.ConcorrenteDTO;
 import org.prova.leilao.controller.dto.LanceDTO;
+import org.prova.leilao.controller.form.ConcorrenteForm;
 import org.prova.leilao.module.Concorrente;
 import org.prova.leilao.module.Lance;
 import org.prova.leilao.repository.ConcorrenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,4 +45,16 @@ public class ConcorrenteController {
             return ResponseEntity.badRequest().build();
     }
     @PostMapping("/{id}")
+    public ResponseEntity<?>inserirConcorrente(@RequestBody ConcorrenteForm concorrenteForm, UriComponentsBuilder uriBuilder){
+        try{
+            Concorrente concorrente = concorrenteForm.criarConcorrente();
+            concorrenteRepository.save(concorrente);
+            ConcorrenteDTO concorrenteDTO = new ConcorrenteDTO(concorrente);
+            uriBuilder.path("/concorrente/{id}");
+            URI uri = uriBuilder.buildAndExpand(concorrente.getId()).toUri();
+            return ResponseEntity.created(uri).body(concorrenteDTO);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
