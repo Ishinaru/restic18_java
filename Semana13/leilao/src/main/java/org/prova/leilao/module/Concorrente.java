@@ -17,10 +17,11 @@ public class Concorrente {
 
     public Concorrente() {}
 
-    public Concorrente(Long id, String nome, String cpf) {
+    public Concorrente(Long id, String nome, String cpf, List<Lance>lances) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
+        this.lances = lances;
     }
 
     public Long getId() {
@@ -47,10 +48,19 @@ public class Concorrente {
         this.cpf = cpf;
     }
 
+    public List<Lance> getLances() {
+        return lances;
+    }
+
+    public void setLances(List<Lance> lances) {
+        this.lances = lances;
+    }
+
     public String toString() {
         return  "Concorrente nº " + id + "\n" +
                 "Nome: " + nome + "\n" +
-                "CPF: " + cpf + "\n";
+                "CPF: " + cpf + "\n"+
+                "Lances: "+lances;
     }
 
     public void mostrarConcorrente(){

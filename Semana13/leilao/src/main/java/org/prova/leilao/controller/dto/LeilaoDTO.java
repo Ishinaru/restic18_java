@@ -1,12 +1,17 @@
 package org.prova.leilao.controller.dto;
 
+import org.prova.leilao.module.Lance;
 import org.prova.leilao.module.Leilao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LeilaoDTO {
     private Long id;
     private String descricao;
-    private Double valorMaximo;
+    private Double valorMinimo;
     private boolean status;
+    private List<Lance> lances = new ArrayList<Lance>();
 
     public LeilaoDTO() {
     }
@@ -14,8 +19,9 @@ public class LeilaoDTO {
     public LeilaoDTO(Leilao leilao) {
         this.id = leilao.getId();
         this.descricao = leilao.getDescricao();
-        this.valorMaximo = leilao.getValorMaximo();
+        this.valorMinimo = leilao.getValorMinimo();
         this.status = leilao.isAberto();
+        this.lances = leilao.getLances();
     }
 
     public Long getId() {
@@ -26,8 +32,8 @@ public class LeilaoDTO {
         return descricao;
     }
 
-    public Double getValorMaximo() {
-        return valorMaximo;
+    public Double getValorMinimo() {
+        return valorMinimo;
     }
 
     public String getStatus(){
@@ -37,4 +43,7 @@ public class LeilaoDTO {
             return "Fechado";
     }
 
+    public List<Lance> getLances() {
+        return lances;
+    }
 }

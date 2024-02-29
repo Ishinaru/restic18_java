@@ -1,9 +1,7 @@
 package org.prova.leilao.controller;
 
-import org.prova.leilao.controller.dto.ConcorrenteDTO;
 import org.prova.leilao.controller.dto.LeilaoDTO;
 import org.prova.leilao.controller.form.LeilaoForm;
-import org.prova.leilao.module.Concorrente;
 import org.prova.leilao.module.Leilao;
 import org.prova.leilao.repository.LeilaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +61,10 @@ public class LeilaoController {
         if(id!=null) {
             try {
                 Leilao leilao = leilaoRepository.getReferenceById(id);
-                leilao.setDescricao(leilao.getDescricao());
-                leilao.setValorMaximo(leilao.getValorMaximo());
-                leilao.setAberto(leilao.isAberto());
+                leilao.setDescricao(leilaoForm.getDescricao());
+                leilao.setValorMinimo(leilaoForm.getValorMinimo());
+                leilao.setAberto(leilaoForm.isAberto());
+                leilao.setLances(leilaoForm.getLances());
                 leilaoRepository.save(leilao);
                 LeilaoDTO leilaoDTO = new LeilaoDTO(leilao);
                 return ResponseEntity.ok(leilaoDTO);

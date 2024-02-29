@@ -11,16 +11,16 @@ public class Leilao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
-    private Double valorMaximo;
+    private Double valorMinimo;
     private boolean aberto;
     @OneToMany(mappedBy = "lanceAssociado")
     private List<Lance> lances = new ArrayList<>();
     public Leilao() {
     }
-    public Leilao(Long id, String descricao, Double valorMaximo) {
+    public Leilao(Long id, String descricao, Double valorMinimo) {
         this.id = id;
         this.descricao = descricao;
-        this.valorMaximo = valorMaximo;
+        this.valorMinimo = valorMinimo;
         this.aberto = true;
     }
 
@@ -40,12 +40,12 @@ public class Leilao {
         this.descricao = descricao;
     }
 
-    public Double getValorMaximo() {
-        return valorMaximo;
+    public Double getValorMinimo() {
+        return valorMinimo;
     }
 
-    public void setValorMaximo(Double valorMaximo) {
-        this.valorMaximo = valorMaximo;
+    public void setValorMinimo(Double valorMinimo) {
+        this.valorMinimo = valorMinimo;
     }
 
     public boolean isAberto() {
@@ -54,6 +54,14 @@ public class Leilao {
 
     public void setAberto(boolean aberto) {
         this.aberto = aberto;
+    }
+
+    public List<Lance> getLances() {
+        return lances;
+    }
+
+    public void setLances(List<Lance> lances) {
+        this.lances = lances;
     }
 
     public void abrirLeilao() {
@@ -71,13 +79,15 @@ public class Leilao {
         if(this.aberto)
             return "Leilão nº "+id+"\n" +
                     "Descrição: "+descricao+"\n"+
-                    "Valor Máximo: "+valorMaximo+"\n" +
-                    "Status: Aberto";
+                    "Valor Máximo: "+valorMinimo+"\n" +
+                    "Status: Aberto\n"+
+                    "Lances: "+lances;
         else
             return "Leilão nº "+id+"\n" +
                     "Descrição: "+descricao+"\n"+
-                    "Valor Máximo: "+valorMaximo+"\n" +
-                    "Status: Fechado";
+                    "Valor Máximo: "+valorMinimo+"\n" +
+                    "Status: Fechado\n"+
+                    "Lances: "+lances;
     }
     public void mostrarLeilao(){
         System.out.println(toString());
