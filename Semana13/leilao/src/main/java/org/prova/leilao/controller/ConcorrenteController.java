@@ -74,7 +74,7 @@ public class ConcorrenteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?>deleteConcorrenteId(@RequestBody ConcorrenteForm concorrenteForm, @PathVariable Long id){
+    public ResponseEntity<?>deleteConcorrenteId(@PathVariable Long id){
         if(id!=null) {
             try {
                 Concorrente concorrente = concorrenteRepository.getReferenceById(id);

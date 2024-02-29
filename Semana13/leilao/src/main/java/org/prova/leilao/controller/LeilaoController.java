@@ -1,14 +1,12 @@
 package org.prova.leilao.controller;
 
 import org.prova.leilao.controller.dto.LeilaoDTO;
+import org.prova.leilao.controller.form.LeilaoForm;
 import org.prova.leilao.module.Leilao;
 import org.prova.leilao.repository.LeilaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,5 +40,8 @@ public class LeilaoController {
         else
             return ResponseEntity.badRequest().build();
     }
+    @PostMapping("/{id}")
+    public ResponseEntity<?> inserir(@RequestBody LeilaoForm leilaoForm , @PathVariable Long id){
 
+    }
 }
