@@ -3,6 +3,7 @@ package org.prova.leilao.controller;
 import org.prova.leilao.controller.dto.ConcorrenteDTO;
 import org.prova.leilao.controller.dto.LanceDTO;
 import org.prova.leilao.controller.dto.LeilaoDTO;
+import org.prova.leilao.controller.form.ConcorrenteForm;
 import org.prova.leilao.controller.form.LanceForm;
 import org.prova.leilao.controller.form.LeilaoForm;
 import org.prova.leilao.module.Concorrente;
@@ -10,6 +11,7 @@ import org.prova.leilao.module.Lance;
 import org.prova.leilao.module.Leilao;
 import org.prova.leilao.repository.LanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -100,13 +102,68 @@ public class LanceController {
             if (lance.getLeilaoAssociado()==null)
                 return ResponseEntity.badRequest().build();
             else if(!lance.getLeilaoAssociado().isAberto())
-                return ResponseEntity.badRequest().build();
-
-            return ResponseEntity.created(uri).body(leilaoDTO);
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            else if(lance.getLeilaoAssociado().isAberto())
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            else
+                return ResponseEntity.created(uri).body(lanceDTO);
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateLance(@RequestBody LanceForm lanceForm, @PathVariable Long id){
+        if(id!=null){
+            try {
+                Lance lance = lanceRepository.getReferenceById(id);
+                lance.setLeilaoAssociado(lanceForm.getLeilaoAssociado());
+                lance.setConcorrenteAssociado(lanceForm.getConcorrenteAssociado());
+                lance.setValor(lanceForm.getValor());
+                lanceRepository.save(lance);
+                LanceDTO lanceDTO = new LanceDTO(lance);
+                if (lance.getLeilaoAssociado() == null)
+                    return ResponseEntity.badRequest().build();
+                else if (!lance.getLeilaoAssociado().isAberto())
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                else if (lance.getLeilaoAssociado().isAberto())
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                else
+                    return ResponseEntity.ok().body(lanceDTO);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        else
+            return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> updateLance(@RequestBody LanceForm lanceForm, @PathVariable Long id){
+        if(id!=null){
+            try {
+                Lance lance = lanceRepository.getReferenceById(id);
+                lance.setLeilaoAssociado(lanceForm.getLeilaoAssociado());
+                lance.setConcorrenteAssociado(lanceForm.getConcorrenteAssociado());
+                lance.setValor(lanceForm.getValor());
+                lanceRepository.save(lance);
+                LanceDTO lanceDTO = new LanceDTO(lance);
+                if (lance.getLeilaoAssociado() == null)
+                    return ResponseEntity.badRequest().build();
+                else if (!lance.getLeilaoAssociado().isAberto())
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                else if (lance.getLeilaoAssociado().isAberto())
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+                else
+                    return ResponseEntity.ok().body(lanceDTO);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        else
+            return ResponseEntity.notFound().build();
+    }
+
 
 
 }
