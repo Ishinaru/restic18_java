@@ -1,13 +1,17 @@
 package org.prova.leilao.controller;
 
+import org.prova.leilao.controller.dto.ConcorrenteDTO;
 import org.prova.leilao.controller.dto.LeilaoDTO;
 import org.prova.leilao.controller.form.LeilaoForm;
+import org.prova.leilao.module.Concorrente;
 import org.prova.leilao.module.Leilao;
 import org.prova.leilao.repository.LeilaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +45,16 @@ public class LeilaoController {
             return ResponseEntity.badRequest().build();
     }
     @PostMapping("/{id}")
-    public ResponseEntity<?> inserir(@RequestBody LeilaoForm leilaoForm , @PathVariable Long id){
-
+    public ResponseEntity<?> inserir(@RequestBody LeilaoForm leilaoForm , UriComponentsBuilder uriBuilder){
+        try{
+            Leilao leilao = leilaoForm.criarLeilao();
+            leilaoRepository.save(leilao);
+            LeilaoDTO leilaoDTO = new LeilaoDTO(leilao);
+            uriBuilder.path("/leilao/{id}");
+            URI uri = uriBuilder.buildAndExpand(leilao.getId()).toUri();
+            return ResponseEntity.created(uri).body(leilaoDTO);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
