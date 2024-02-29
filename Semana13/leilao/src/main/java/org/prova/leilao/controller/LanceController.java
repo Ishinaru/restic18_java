@@ -25,11 +25,12 @@ import java.util.List;
 public class LanceController {
     @Autowired
     private LanceRepository lanceRepository;
+
     @GetMapping
-    public List<LanceDTO> retornaLance(){
-        List<Lance>listaLance = (ArrayList<Lance>)lanceRepository.findAll();
+    public List<LanceDTO> retornaLance() {
+        List<Lance> listaLance = (ArrayList<Lance>) lanceRepository.findAll();
         List<LanceDTO> listaLanceDTO = new ArrayList<LanceDTO>();
-        for (Lance lance: listaLance){
+        for (Lance lance : listaLance) {
             LanceDTO lanceDTO = new LanceDTO(lance);
             listaLanceDTO.add(lanceDTO);
         }
@@ -37,7 +38,7 @@ public class LanceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> retornaLanceId(@PathVariable Long id){
+    public ResponseEntity<?> retornaLanceId(@PathVariable Long id) {
         if (id != null) {
             try {
                 Lance lance = lanceRepository.getReferenceById(id);
@@ -46,19 +47,18 @@ public class LanceController {
             } catch (Exception e) {
                 return ResponseEntity.notFound().build();
             }
-        }
-        else
+        } else
             return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/leilao={id}")
-    public ResponseEntity<?> retornaLeilaoId(@PathVariable Long id){
+    public ResponseEntity<?> retornaLeilaoId(@PathVariable Long id) {
         if (id != null) {
             try {
-                List<Lance> listaLance = (ArrayList<Lance>)lanceRepository.findByLeilaoAssociado(id);
+                List<Lance> listaLance = (ArrayList<Lance>) lanceRepository.findByLeilaoAssociado(id);
                 LeilaoDTO listaLeilao;
                 List<LeilaoDTO> listaLeiloesDTO = new ArrayList<LeilaoDTO>();
-                for (Lance lance: listaLance){
+                for (Lance lance : listaLance) {
                     listaLeilao = new LeilaoDTO(lance.getLeilaoAssociado());
                     listaLeiloesDTO.add(listaLeilao);
                 }
@@ -66,19 +66,18 @@ public class LanceController {
             } catch (Exception e) {
                 return ResponseEntity.notFound().build();
             }
-        }
-        else
+        } else
             return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/concorrente={id}")
-    public ResponseEntity<?> retornaConcorrenteId(@PathVariable Long id){
+    public ResponseEntity<?> retornaConcorrenteId(@PathVariable Long id) {
         if (id != null) {
             try {
-                List<Lance> listaLance = (ArrayList<Lance>)lanceRepository.findByConcorrenteAssociado(id);
+                List<Lance> listaLance = (ArrayList<Lance>) lanceRepository.findByConcorrenteAssociado(id);
                 ConcorrenteDTO listaCorrente;
                 List<ConcorrenteDTO> listaLeiloesDTO = new ArrayList<ConcorrenteDTO>();
-                for (Lance lance: listaLance){
+                for (Lance lance : listaLance) {
                     listaCorrente = new ConcorrenteDTO(lance.getConcorrenteAssociado());
                     listaLeiloesDTO.add(listaCorrente);
                 }
@@ -86,35 +85,34 @@ public class LanceController {
             } catch (Exception e) {
                 return ResponseEntity.notFound().build();
             }
-        }
-        else
+        } else
             return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<?> inserirLance(@RequestBody LanceForm lanceForm, UriComponentsBuilder uriBuilder){
-        try{
+    public ResponseEntity<?> inserirLance(@RequestBody LanceForm lanceForm, UriComponentsBuilder uriBuilder) {
+        try {
             Lance lance = lanceForm.criarLance();
             lanceRepository.save(lance);
             LanceDTO lanceDTO = new LanceDTO(lance);
             uriBuilder.path("/lance/{id}");
             URI uri = uriBuilder.buildAndExpand(lance.getId()).toUri();
-            if (lance.getLeilaoAssociado()==null)
+            if (lance.getLeilaoAssociado() == null)
                 return ResponseEntity.badRequest().build();
-            else if(!lance.getLeilaoAssociado().isAberto())
+            else if (!lance.getLeilaoAssociado().isAberto())
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-            else if(lance.getLeilaoAssociado().isAberto())
+            else if (lance.getLeilaoAssociado().isAberto())
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             else
                 return ResponseEntity.created(uri).body(lanceDTO);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateLance(@RequestBody LanceForm lanceForm, @PathVariable Long id){
-        if(id!=null){
+    public ResponseEntity<?> updateLance(@RequestBody LanceForm lanceForm, @PathVariable Long id) {
+        if (id != null) {
             try {
                 Lance lance = lanceRepository.getReferenceById(id);
                 lance.setLeilaoAssociado(lanceForm.getLeilaoAssociado());
@@ -133,20 +131,16 @@ public class LanceController {
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
             }
-        }
-        else
+        } else
             return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> updateLance(@RequestBody LanceForm lanceForm, @PathVariable Long id){
-        if(id!=null){
+    public ResponseEntity<?> deleteLance(@PathVariable Long id) {
+        if (id != null) {
             try {
                 Lance lance = lanceRepository.getReferenceById(id);
-                lance.setLeilaoAssociado(lanceForm.getLeilaoAssociado());
-                lance.setConcorrenteAssociado(lanceForm.getConcorrenteAssociado());
-                lance.setValor(lanceForm.getValor());
-                lanceRepository.save(lance);
+                lanceRepository.delete(lance);
                 LanceDTO lanceDTO = new LanceDTO(lance);
                 if (lance.getLeilaoAssociado() == null)
                     return ResponseEntity.badRequest().build();
@@ -154,17 +148,15 @@ public class LanceController {
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
                 else if (lance.getLeilaoAssociado().isAberto())
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-                else
+                else {
+                    System.out.println(lanceDTO);
                     return ResponseEntity.ok().body(lanceDTO);
+                }
             } catch (Exception e) {
                 return ResponseEntity.badRequest().build();
             }
-        }
-        else
+        } else
             return ResponseEntity.notFound().build();
     }
-
-
-
 }
 
