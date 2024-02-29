@@ -1,10 +1,8 @@
 package org.prova.leilao.controller;
 
 import org.prova.leilao.controller.dto.ConcorrenteDTO;
-import org.prova.leilao.controller.dto.LanceDTO;
 import org.prova.leilao.controller.form.ConcorrenteForm;
 import org.prova.leilao.module.Concorrente;
-import org.prova.leilao.module.Lance;
 import org.prova.leilao.repository.ConcorrenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -75,6 +73,18 @@ public class ConcorrenteController {
         return ResponseEntity.badRequest().build();
     }
 
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?>deleteConcorrenteId(@RequestBody ConcorrenteForm concorrenteForm, @PathVariable Long id){
+        if(id!=null) {
+            try {
+                Concorrente concorrente = concorrenteRepository.getReferenceById(id);
+                ConcorrenteDTO concorrenteDTO = new ConcorrenteDTO(concorrente);
+                concorrenteRepository.delete(concorrente);
+                return ResponseEntity.ok(concorrenteDTO);
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        return ResponseEntity.badRequest().build();
+    }
 }
