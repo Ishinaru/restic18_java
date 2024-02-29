@@ -80,6 +80,7 @@ public class ConcorrenteController {
                 Concorrente concorrente = concorrenteRepository.getReferenceById(id);
                 ConcorrenteDTO concorrenteDTO = new ConcorrenteDTO(concorrente);
                 concorrenteRepository.delete(concorrente);
+                System.out.println("Concorrente "+concorrenteDTO.getNome()+" Deletado!!!!");
                 return ResponseEntity.ok(concorrenteDTO);
             } catch (Exception e) {
                 return ResponseEntity.notFound().build();

@@ -75,4 +75,20 @@ public class LeilaoController {
         }
         return ResponseEntity.badRequest().build();
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?>deleteLeilao(@PathVariable Long id){
+        if(id!=null) {
+            try {
+                Leilao leilao = leilaoRepository.getReferenceById(id);
+                LeilaoDTO leilaoDTO = new LeilaoDTO(leilao);
+                leilaoRepository.delete(leilao);
+                System.out.println("Leilão "+leilaoDTO.getDescricao()+" Deletado!!!!");
+                return ResponseEntity.ok(leilaoDTO);
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 }
