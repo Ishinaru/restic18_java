@@ -1,8 +1,15 @@
 package org.prova.leilao.module;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Lance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
     private Leilao leilaoAssociado;
+    @ManyToOne
     private Concorrente concorrenteAssociado;
     private Double valor;
     public Lance() {
