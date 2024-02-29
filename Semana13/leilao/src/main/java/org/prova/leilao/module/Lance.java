@@ -2,6 +2,9 @@ package org.prova.leilao.module;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Lance {
     @Id

@@ -1,9 +1,9 @@
 package org.prova.leilao.module;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Concorrente {
@@ -12,6 +12,8 @@ public class Concorrente {
     private Long id;
     private String nome;
     private String cpf;
+    @OneToMany(mappedBy = "lanceAssociedado")
+    private List<Lance>lances = new ArrayList<>();
 
     public Concorrente() {}
 

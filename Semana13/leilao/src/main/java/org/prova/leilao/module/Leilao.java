@@ -1,9 +1,9 @@
 package org.prova.leilao.module;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Leilao {
@@ -13,6 +13,8 @@ public class Leilao {
     private String descricao;
     private Double valorMaximo;
     private boolean aberto;
+    @OneToMany(mappedBy = "lanceAssociado")
+    private List<Lance> lances = new ArrayList<>();
     public Leilao() {
     }
     public Leilao(Long id, String descricao, Double valorMaximo) {
@@ -54,6 +56,17 @@ public class Leilao {
         this.aberto = aberto;
     }
 
+    public void abrirLeilao() {
+        this.aberto = true;
+    }
+
+    public void fecharLeilao() {
+        this.aberto = false;
+    }
+    public void addLance(Lance lance) {
+        this.lances.add(lance);
+        lance.setLeilaoAssociado(this);
+    }
     public String toString(){
         if(this.aberto)
             return "Leilão nº "+id+"\n" +
